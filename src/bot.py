@@ -35,7 +35,7 @@ def start(message):
     elif message.text.lower() == "/getstars":
         get_papers(message.from_user.id)
     else:
-        bot.send_message(message.from_user.id, "Команда не распознана. Напишите /help.")
+        bot.send_message(message.from_user.id, "Команда не распознана \nНапишите /help")
 
 @bot.callback_query_handler(func=lambda call: call.data in gPapersTypes.keys())
 def callback_worker(call):
@@ -45,7 +45,7 @@ def callback_worker(call):
 @bot.callback_query_handler(func=lambda call: call.data[0:3] == '_&_')
 def callback_worker(call):
     db.add_paper(call.data[3:].split('|'), call.from_user.id)
-    bot.send_message(call.from_user.id, "Актив добавлен в закладки")
+    bot.send_message(call.from_user.id, "> Актив добавлен в закладки")
 
 @bot.callback_query_handler(func=lambda call: call.data[0:7] == '_paper_')
 def callback_worker(call):
@@ -60,11 +60,11 @@ def callback_worker(call):
 @bot.callback_query_handler(func=lambda call: call.data == 'truly_delete')
 def callback_worker(call):
     db.delete_paper(call.from_user.id)
-    bot.send_message(call.from_user.id, "Актив удален из закладок")
+    bot.send_message(call.from_user.id, "> Актив удален из закладок")
 
 @bot.callback_query_handler(func=lambda call: call.data == 'no_delete')
 def callback_worker(call):
-    bot.send_message(call.from_user.id, "Актив cохранен")
+    bot.send_message(call.from_user.id, "> Актив cохранен")
 
 @bot.callback_query_handler(func=lambda call: call.data == 'overall')
 def callback_worker(call):
@@ -124,7 +124,7 @@ def set_paper_type(user_id):
     for x in gPapersTypes.keys():    
         key = types.InlineKeyboardButton(text=gPapersTypes[x], callback_data=x); 
         keyboard.add(key); 
-    question = 'Выберите тип бумаг';
+    question = 'Выберите тип актива:';
     bot.send_message(user_id, text=question, reply_markup=keyboard)
 
 
@@ -143,7 +143,7 @@ def search_paper(message):
         x.pair_type = x.pair_type or 'None'
         key = types.InlineKeyboardButton(text=desription, callback_data= '_&_' + x.symbol + "|" + x.country + "|" + x.pair_type)
         keyboard.add(key)
-    question = 'Выберите актив';
+    question = 'Выберите актив:';
     bot.send_message(message.from_user.id, text=question, reply_markup=keyboard)
 
 def get_papers(user_id):
@@ -178,7 +178,7 @@ def confirm_delete(user_id):
     keyboard.add(key)
     key = types.InlineKeyboardButton(text='Нет', callback_data = 'no_delete')
     keyboard.add(key)
-    question = 'Действительно удалить актив:';
+    question = 'Действительно удалить актив?';
     bot.send_message(user_id, text=question, reply_markup=keyboard)
 
 def get_stats(user_id):
