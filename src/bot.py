@@ -28,8 +28,8 @@ def start(message):
         config(message.from_user.id)
     elif message.text == "/help":
         bot.send_message(message.from_user.id, "Список команд: \n\
-/star\n\
-/getStars\n")
+/star - добавить актив в закладки\n\
+/getStars - смотреть список закладок\n")
     elif message.text == "/star":
         set_paper_type(message.from_user.id)
     elif message.text.lower() == "/getstars":
