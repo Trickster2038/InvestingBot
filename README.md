@@ -16,10 +16,10 @@
 
 ## Скриншоты
 
-![1](screens\1.jpg)
+![](screens/1.jpg)
 
-![1](screens\2.jpg)
+![](screens/2.jpg)
 
-![1](screens\3.jpg)
+![](screens/3.jpg)
 
-![1](screens\4.jpg)
+![](screens/4.jpg)
